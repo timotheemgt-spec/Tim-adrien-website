@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Timothée Adrien — Maison</title>
+<meta name="description" content="Timothée Adrien · mannequin & création musicale · Paris" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F2EBDD;
+    --paper:#EDE4D2;
+    --ink:#1A1714;
+    --cognac:#9C5A38;
+    --cognac-deep:#6E3E26;
+    --rule:#1A1714;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--ivory);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%;color:transparent;font-size:0}
+  img.is-broken{display:none !important}
+  .mono{font-family:'Inter';letter-spacing:.22em;text-transform:uppercase;font-size:11px;font-weight:400}
+  .serif{font-family:'Cormorant Garamond',serif;font-weight:300}
+  .italic{font-style:italic}
+
+  /* Top bar */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:10;
+    padding:22px 40px;display:flex;align-items:center;justify-content:space-between;
+    background:linear-gradient(180deg, rgba(242,235,221,.92), rgba(242,235,221,0));
+    backdrop-filter:blur(2px);
+  }
+  .brand{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.04em}
+  .header-right{display:flex;align-items:center;gap:34px}
+  nav ul{display:flex;gap:34px;list-style:none}
+  nav a{font-family:'Inter';font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:400;opacity:.78}
+  nav a:hover{opacity:1;color:var(--cognac-deep)}
+  .lang-switch{display:flex;align-items:center;gap:7px}
+  .lang-btn{
+    background:none;border:none;cursor:pointer;font-family:'Inter';
+    font-size:11px;letter-spacing:.18em;color:var(--ink);opacity:.4;
+    text-transform:uppercase;font-weight:500;transition:.2s;padding:0
+  }
+  .lang-btn.active{opacity:1;color:var(--cognac-deep)}
+  .lang-btn:hover{opacity:.85}
+  .lang-sep{opacity:.3;font-size:11px}
+
+  /* Hero */
+  .hero{
+    min-height:100vh;padding:140px 40px 60px;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:end;
+  }
+  .hero-left{position:relative}
+  .issue{display:flex;justify-content:space-between;margin-bottom:24px;color:var(--ink);opacity:.65}
+  .display{
+    font-family:'Cormorant Garamond',serif;font-weight:300;line-height:.86;
+    font-size:clamp(72px,11vw,176px);letter-spacing:-0.02em;
+  }
+  .display em{font-style:italic;color:var(--cognac-deep)}
+  .lede{margin-top:42px;max-width:440px;font-size:15px;line-height:1.7;opacity:.78}
+  .lede:first-letter{font-family:'Cormorant Garamond',serif;font-size:46px;float:left;line-height:.8;padding:6px 8px 0 0;color:var(--cognac-deep);font-style:italic}
+  .meta{margin-top:48px;display:flex;gap:42px;border-top:1px solid var(--rule);padding-top:18px}
+  .meta div span{display:block;opacity:.55;font-size:10px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:6px}
+  .meta div b{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:18px}
+
+  /* Hero photo */
+  .photo{
+    position:relative;height:78vh;min-height:560px;overflow:hidden;
+    background:
+      radial-gradient(ellipse at 30% 80%, #C97A4A 0%, #8E4A2C 35%, #3D2516 70%, #0E0805 100%);
+  }
+  .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}
+  .photo::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.0) 40%, rgba(20,10,5,.45));
+    pointer-events:none
+  }
+  .photo-tag{
+    position:absolute;left:18px;bottom:18px;z-index:2;color:#F2EBDD;opacity:.95;
+    font-family:'Inter';font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+    padding:6px 10px;border:1px solid rgba(242,235,221,.6);
+    background:rgba(20,10,5,.18);backdrop-filter:blur(2px)
+  }
+  .photo-cap{
+    position:absolute;right:18px;top:18px;z-index:2;color:#F2EBDD;text-align:right;
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;line-height:1.4;opacity:.92;
+    text-shadow:0 1px 6px rgba(0,0,0,.3)
+  }
+
+  /* Carrousel — L'Officiel California */
+  .carousel .slide{
+    position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease;pointer-events:none
+  }
+  .carousel .slide.on{opacity:1;pointer-events:auto}
+  .carousel .slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}
+  .carousel-dots{
+    position:absolute;right:18px;bottom:18px;z-index:5;display:flex;gap:8px
+  }
+  .carousel-dots .dot{
+    width:7px;height:7px;border-radius:50%;background:rgba(242,235,221,.45);
+    transition:.4s ease;cursor:pointer
+  }
+  .carousel-dots .dot.active{background:#F2EBDD;width:28px;border-radius:4px}
+  .carousel-dots .dot:hover{background:rgba(242,235,221,.8)}
+
+  /* Editorial strip */
+  .strip{
+    margin-top:8px;padding:60px 40px;border-top:1px solid var(--rule);
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start;
+  }
+  .strip h2{
+    grid-column:1/4;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:46px;line-height:1;
+  }
+  .strip h2 em{font-style:italic;color:var(--cognac-deep)}
+  .strip .col{grid-column:span 4}
+  .strip p{font-size:14px;line-height:1.75;opacity:.78}
+  .strip .col h4{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:20px;margin-bottom:10px}
+
+  /* Marquee — vraies collaborations */
+  .marquee{
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    padding:26px 0;overflow:hidden;background:var(--paper);
+    position:relative
+  }
+  .marquee::before, .marquee::after{
+    content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none
+  }
+  .marquee::before{left:0;background:linear-gradient(90deg, var(--paper), transparent)}
+  .marquee::after{right:0;background:linear-gradient(-90deg, var(--paper), transparent)}
+  .marquee-track{
+    display:flex;gap:0;white-space:nowrap;width:max-content;
+    animation:scroll-left 48s linear infinite
+  }
+  .marquee-track:hover{animation-play-state:paused}
+  .marquee-track span{
+    font-family:'Cormorant Garamond',serif;font-weight:300;font-size:30px;letter-spacing:.02em;color:var(--ink);
+    padding:0 38px;display:inline-flex;align-items:center;gap:38px
+  }
+  .marquee-track span em{font-style:italic;color:var(--cognac-deep)}
+  .marquee-track .sep{
+    color:var(--cognac-deep);font-size:14px;padding:0;font-family:'Inter';font-weight:400;
+    transform:translateY(-4px)
+  }
+  @keyframes scroll-left{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+  /* Press feature — L'OFFICIEL */
+  .press{
+    padding:100px 40px;border-top:1px solid var(--rule);
+    display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:start
+  }
+  .press-left{position:relative;aspect-ratio:3/2;overflow:hidden;background:linear-gradient(160deg,#a55a35,#3a1f12)}
+  .press-left img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}
+  .press-right{display:flex;flex-direction:column;justify-content:space-between;gap:30px;padding:30px 0}
+  .press-pub{
+    display:flex;align-items:center;gap:14px;color:var(--cognac-deep);
+    font-family:'Cormorant Garamond',serif;font-size:32px;font-style:italic
+  }
+  .press-pub::after{content:"";flex:1;height:1px;background:var(--rule);opacity:.4}
+  .press-right h3{
+    font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5vw,68px);line-height:.95;letter-spacing:-.01em
+  }
+  .press-right h3 em{font-style:italic;color:var(--cognac-deep)}
+  .press-right p{font-size:15px;line-height:1.75;opacity:.78;max-width:480px}
+  .press-second{
+    position:relative;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(160deg,#b3aa92,#403828)
+  }
+  .press-second img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+  .press-meta{
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;
+    border-top:1px solid var(--rule);padding-top:18px;font-size:12px
+  }
+  .press-meta div span{display:block;opacity:.55;font-size:10px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:4px}
+  .press-meta div b{font-family:'Cormorant Garamond',serif;font-weight:400;font-style:italic;font-size:17px}
+
+  /* Book grid */
+  .section-head{
+    padding:100px 40px 24px;display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--rule)
+  }
+  .section-head h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:46px;letter-spacing:-.01em}
+  .section-head h3 em{font-style:italic;color:var(--cognac-deep)}
+  /* Masonry book — chaque photo respecte ses proportions */
+  .grid{
+    padding:0 40px 80px;column-count:3;column-gap:18px;
+  }
+  .tile{
+    position:relative;overflow:hidden;background:#cdb798;cursor:pointer;
+    break-inside:avoid;margin:0 0 18px;display:block;
+  }
+  .tile img{
+    display:block;width:100%;height:auto;transition:transform .8s ease;
+  }
+  .tile:hover img{transform:scale(1.04)}
+  .tile::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, transparent 55%, rgba(20,10,5,.55));
+    opacity:0;transition:opacity .3s ease;pointer-events:none
+  }
+  .tile:hover::after{opacity:1}
+  .tile span{
+    position:absolute;left:12px;bottom:12px;z-index:2;color:#F2EBDD;font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:0;transform:translateY(6px);transition:.3s ease;
+    background:rgba(20,10,5,.5);padding:5px 8px;backdrop-filter:blur(2px)
+  }
+  .tile:hover span{opacity:.95;transform:translateY(0)}
+  .t1{background:radial-gradient(circle at 30% 30%, #d8c4a3 0%, #b9a07d 40%, #6b5440 100%)}
+  .t2{background:radial-gradient(circle at 70% 60%, #efe6d3 0%, #d3c4a8 50%, #8c7657 100%)}
+  .t3{background:radial-gradient(circle at 50% 50%, #2d6248 0%, #1c4030 60%, #0c1f17 100%)}
+  .t4{background:linear-gradient(135deg, #b8623d 0%, #6e3920 100%)}
+  .t5{background:linear-gradient(180deg, #ede4d2 0%, #c2b39a 100%)}
+  .t6{background:linear-gradient(160deg, #1a1714 0%, #3b2a20 60%, #6e3e26 100%)}
+  .t7{background:radial-gradient(circle at 40% 50%, #d4a17b 0%, #9c5a38 55%, #3d2516 100%)}
+  .t8{background:linear-gradient(160deg,#2b261f,#7b5736)}
+  .t9{background:radial-gradient(circle at 50% 50%,#d3c3a3,#5a4732)}
+  .t10{background:linear-gradient(135deg,#1d1916,#615240)}
+  .t11{background:radial-gradient(circle at 50% 50%,#cf935f,#3d2210)}
+  .t12{background:radial-gradient(ellipse at 50% 50%,#d8a37a 0%,#7a4625 50%,#0e0805 100%)}
+  .t13{background:linear-gradient(160deg,#262120,#0d0a08)}
+  .t14{background:radial-gradient(circle at 50% 40%,#e3d3b6,#7a6850 70%,#2a221a)}
+  .t15{background:linear-gradient(135deg,#a8997d,#3a2f23)}
+  .t16{background:radial-gradient(ellipse at 60% 50%,#d8a880,#5a3e26)}
+  .t17{background:linear-gradient(180deg,#1a1716,#403a32)}
+  .t18{background:radial-gradient(circle at 40% 60%,#bea27f,#3a2c1f)}
+  .t19{background:linear-gradient(160deg,#d8c5a6,#8c7556)}
+  .t20{background:linear-gradient(135deg,#3d2e22,#9c6c44)}
+  .t21{background:radial-gradient(ellipse at 50% 50%,#e6d8c0,#a08868 60%,#3e3022)}
+  .t22{background:radial-gradient(circle at 50% 35%,#ece2cf,#b0a084 60%,#473b2d)}
+  .t23{background:radial-gradient(circle at 50% 30%,#e4ddd0,#9aa0a4 60%,#3e3d3a)}
+  .t24{background:radial-gradient(circle at 50% 40%,#d8c89e,#9c8a5c 60%,#3e3520)}
+  .t25{background:radial-gradient(circle at 50% 30%,#9fb0c4,#5a6b80 60%,#1c1f24)}
+  .t26{background:radial-gradient(circle at 50% 35%,#dcdde0,#a9a39a 60%,#4a4034)}
+  .t27{background:radial-gradient(circle at 50% 30%,#e4e6e8,#8c8e90 60%,#33363a)}
+
+  /* UGC — Portefeuille création de contenu */
+  .ugc{padding:100px 40px;border-top:1px solid var(--rule)}
+  .ugc-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:30px}
+  .ugc-head h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:46px;letter-spacing:-.01em}
+  .ugc-head h3 em{font-style:italic;color:var(--cognac-deep)}
+  .ugc-lede{font-size:15px;line-height:1.75;opacity:.78;max-width:680px;margin:0 0 50px}
+  .ugc-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:22px
+  }
+  .ugc-card{
+    position:relative;cursor:pointer;background:var(--paper);
+    overflow:hidden;transition:transform .35s ease, box-shadow .35s ease;
+    display:flex;flex-direction:column
+  }
+  .ugc-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(26,23,20,.12)}
+  .ugc-thumb{
+    position:relative;aspect-ratio:4/5;overflow:hidden;
+    display:grid;place-items:center
+  }
+  .ugc-thumb::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, transparent 55%, rgba(20,10,5,.4));
+    opacity:.6;pointer-events:none
+  }
+  .ugc-preview{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:block
+  }
+  .play-mini{
+    position:relative;z-index:2;width:54px;height:54px;border-radius:50%;
+    background:rgba(242,235,221,.18);border:1px solid rgba(242,235,221,.7);
+    color:#F2EBDD;display:grid;place-items:center;
+    backdrop-filter:blur(6px);transition:.3s
+  }
+  .play-mini svg{width:14px;height:14px;margin-left:2px}
+  .ugc-card:hover .play-mini{background:rgba(242,235,221,.95);color:var(--ink);border-color:var(--ivory)}
+  .ugc-info{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px}
+  .ugc-tag{font-family:'Inter';font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--cognac-deep);font-weight:500}
+  .ugc-info h4{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:24px;line-height:1.1}
+  .ugc-info p{font-size:12.5px;line-height:1.55;opacity:.66;margin-top:2px}
+  /* UGC gradient backdrops — palette éditoriale chaude */
+  .u1{background:radial-gradient(circle at 30% 40%, #d4a572 0%, #8b5a35 50%, #2e1808 100%)}
+  .u2{background:linear-gradient(135deg,#eee2cc,#b39780 70%,#5a4732)}
+  .u3{background:radial-gradient(circle at 60% 50%, #2a2622 0%, #6e5736 60%, #c5a572 130%)}
+  .u4{background:linear-gradient(160deg,#1a1916,#3b2a20 60%,#7a4a2c)}
+  .u5{background:radial-gradient(ellipse at 50% 40%,#e3c79a,#a07748 60%,#3a2818)}
+  .u6{background:linear-gradient(135deg,#262220,#4a3e30 60%,#8a6e4d)}
+  .u7{background:radial-gradient(circle at 40% 60%,#d8b58a,#7b5132 70%,#1e1208)}
+  .u8{background:linear-gradient(180deg,#dac8aa,#a08768 50%,#3a2c1c)}
+  .u9{background:radial-gradient(ellipse at 50% 50%,#caa37e 0%,#6e4a2c 60%,#0e0805)}
+  .u10{background:linear-gradient(135deg,#1c1916,#3e2f22 50%,#9c6c44)}
+  .u11{background:radial-gradient(circle at 50% 30%,#e6d6b8,#a48868 60%,#3a2c20)}
+
+  /* UGC — badge "Vidéo" + carte cliquable */
+  .ugc-live{
+    position:absolute;left:14px;top:14px;z-index:3;
+    font-family:'Inter';font-size:9px;letter-spacing:.24em;text-transform:uppercase;
+    color:#F2EBDD;background:rgba(20,10,5,.6);padding:5px 9px;
+    border:1px solid rgba(242,235,221,.6);backdrop-filter:blur(4px)
+  }
+  .ugc-card.has-video{cursor:pointer}
+  .ugc-card.has-video .play-mini{
+    background:rgba(242,235,221,.95);color:var(--ink);border-color:var(--ivory);
+    width:64px;height:64px
+  }
+  .ugc-card.has-video:hover .play-mini{transform:scale(1.08)}
+  .ugc-card.has-video:hover{box-shadow:0 20px 50px rgba(110,62,38,.25)}
+
+  /* Lightbox vidéo */
+  .lightbox{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(10,8,7,.94);backdrop-filter:blur(8px);
+    display:none;align-items:center;justify-content:center;padding:40px;
+    opacity:0;transition:opacity .35s ease
+  }
+  .lightbox.open{display:flex;opacity:1}
+  .lightbox-content{
+    position:relative;max-width:900px;width:100%;
+    display:flex;flex-direction:column;gap:22px;align-items:center
+  }
+  .lightbox-content video{
+    width:100%;max-height:78vh;display:block;background:#000;
+    aspect-ratio:9/16;object-fit:contain
+  }
+  .lightbox-close{
+    position:absolute;top:24px;right:32px;z-index:2;
+    background:transparent;border:1px solid rgba(242,235,221,.45);color:#F2EBDD;
+    width:46px;height:46px;border-radius:50%;font-size:22px;line-height:1;cursor:pointer;
+    display:grid;place-items:center;transition:.3s;
+    font-family:'Inter';font-weight:300
+  }
+  .lightbox-close:hover{background:rgba(242,235,221,.18);border-color:#F2EBDD}
+  .lightbox-info{color:#F2EBDD;text-align:center;max-width:600px}
+  .lightbox-tag{
+    display:block;font-family:'Inter';font-size:10px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--cognac);opacity:.95;margin-bottom:8px
+  }
+  .lightbox-title{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:30px;
+    line-height:1.2
+  }
+  .lightbox-title em{font-style:normal;color:var(--cognac)}
+  @media(max-width:700px){
+    .lightbox{padding:24px}
+    .lightbox-close{top:16px;right:16px;width:40px;height:40px}
+    .lightbox-content video{max-height:70vh}
+  }
+
+  /* Music — vidéo player */
+  .music-video{
+    position:relative;aspect-ratio:9/16;background:#0a0807;overflow:hidden;
+    border:1px solid rgba(26,23,20,.15)
+  }
+  .music-video video{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0a0807
+  }
+  .music-video .fallback{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:linear-gradient(135deg, #1a1714 0%, #6e3e26 70%, #c97a4a 100%);
+    color:var(--ivory);text-align:center;padding:30px;gap:14px
+  }
+  .music-video .fallback svg{width:48px;height:48px;opacity:.8}
+  .music-video .fallback p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;line-height:1.5;max-width:280px;opacity:.85}
+  .music-video .fallback code{font-family:'Inter';font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,235,221,.7);padding:6px 10px;border:1px solid rgba(242,235,221,.3)}
+  @media (max-width:1100px){.grid{column-count:2}}
+
+  /* Music feature */
+  .music{
+    padding:100px 40px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center
+  }
+  .music-art{
+    position:relative;aspect-ratio:3/4;background:linear-gradient(135deg, #1a1714 0%, #6e3e26 70%, #c97a4a 100%);overflow:hidden
+  }
+  .music-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+  .music-art::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 60% 40%, rgba(245,220,180,.15), transparent 60%);pointer-events:none
+  }
+  .music h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:54px;line-height:1;margin-bottom:24px}
+  .music h3 em{font-style:italic;color:var(--cognac-deep)}
+  .music p{font-size:15px;line-height:1.75;opacity:.78;max-width:460px}
+  .player{
+    margin-top:32px;border:1px solid var(--rule);padding:18px 22px;display:flex;align-items:center;gap:18px;background:rgba(255,255,255,.25);
+  }
+  .play{
+    width:42px;height:42px;border-radius:50%;background:var(--ink);color:var(--ivory);display:grid;place-items:center;flex-shrink:0;border:none;cursor:pointer
+  }
+  .play svg{width:14px;height:14px;margin-left:2px}
+  .track b{display:block;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400}
+  .track span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+  .wave{flex:1;height:24px;display:flex;align-items:center;gap:2px}
+  .wave i{display:block;width:2px;background:var(--ink);opacity:.55;animation:pulse 1.2s ease-in-out infinite}
+  .wave i:nth-child(odd){opacity:.35}
+  @keyframes pulse{
+    0%,100%{height:6px}50%{height:18px}
+  }
+  /* Lecteur SoundCloud sur-mesure */
+  .sc-tracks{margin-top:32px;display:flex;flex-direction:column;gap:14px}
+  .sc-track{margin-top:0;position:relative}
+  .track b em{font-style:italic;color:var(--cognac-deep);font-size:.82em}
+  .play .ic-pause{display:none;margin-left:0}
+  .player.is-playing .play .ic-play{display:none}
+  .player.is-playing .play .ic-pause{display:block}
+  .wave i{animation-play-state:paused}
+  .player.is-playing .wave i{animation-play-state:running}
+  .sc-link{
+    display:inline-block;margin-top:14px;font-family:'Inter';font-size:11px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--cognac-deep);opacity:.85;font-weight:500
+  }
+  .sc-link:hover{opacity:1}
+
+  /* About / bio */
+  .bio{
+    padding:120px 40px;border-top:1px solid var(--rule);
+    display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center
+  }
+  .bio-photo{position:relative;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(160deg,#7a6850,#2a221a)}
+  .bio-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+  .bio-text h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5vw,72px);line-height:.95;letter-spacing:-.01em}
+  .bio-text h3 em{font-style:italic;color:var(--cognac-deep)}
+  .bio-text p{margin-top:22px;font-size:15px;line-height:1.8;opacity:.78;max-width:520px}
+  .bio-stats{
+    margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+    border-top:1px solid var(--rule);padding-top:24px;max-width:520px
+  }
+  .bio-stats div span{display:block;opacity:.55;font-size:10px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:6px}
+  .bio-stats div b{font-family:'Cormorant Garamond',serif;font-weight:400;font-style:italic;font-size:22px}
+
+  /* Footer */
+  footer{
+    border-top:1px solid var(--rule);padding:50px 40px 40px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px
+  }
+  footer h5{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:18px;margin-bottom:14px}
+  footer p, footer a{font-size:12px;line-height:1.85;opacity:.75}
+  footer a:hover{color:var(--cognac-deep);opacity:1}
+  .copy{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:18px;margin-top:24px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.55}
+
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;gap:40px;padding:120px 22px 40px}
+    .photo{height:70vh}
+    .strip{grid-template-columns:1fr;padding:50px 22px}
+    .strip h2,.strip .col{grid-column:auto}
+    .press{grid-template-columns:1fr;padding:60px 22px}
+    .press-left{min-height:380px}
+    .section-head{padding:60px 22px 20px}
+    .grid{column-count:1;padding:0 22px 60px;column-gap:12px}
+    .tile{margin-bottom:12px}
+    .music{grid-template-columns:1fr;padding:60px 22px}
+    .ugc{padding:60px 22px}
+    .ugc-grid{grid-template-columns:1fr;gap:16px}
+    .ugc-head{flex-direction:column;align-items:flex-start;gap:8px}
+    .bio{grid-template-columns:1fr;padding:60px 22px;gap:40px}
+    .bio-photo{aspect-ratio:4/5}
+    nav ul{display:none}
+    footer{grid-template-columns:1fr 1fr;padding:40px 22px 30px}
+    header{padding:18px 22px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Timothée<em style="font-style:italic"> Adrien</em></div>
+  <div class="header-right">
+    <nav>
+      <ul>
+        <li><a href="#book" data-fr="Book" data-en="Book">Book</a></li>
+        <li><a href="#press" data-fr="Press" data-en="Press">Press</a></li>
+        <li><a href="#ugc" data-fr="UGC" data-en="UGC">UGC</a></li>
+        <li><a href="#musique" data-fr="Musique" data-en="Music">Musique</a></li>
+        <li><a href="#about" data-fr="À propos" data-en="About">À propos</a></li>
+        <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="lang-switch" aria-label="Langue / Language">
+      <button class="lang-btn active" data-lang="fr">FR</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="issue mono">
+      <span data-fr="Maison — Édition n°01" data-en="Maison — Issue No.01">Maison — Édition n°01</span>
+      <span data-fr="Paris · Printemps 2026" data-en="Paris · Spring 2026">Paris · Printemps 2026</span>
+    </div>
+    <h1 class="display">Timothée<br><em>Adrien.</em></h1>
+    <p class="lede" data-fr="Mannequin et créateur. À la croisée de la mode et de la musique, entre les ateliers parisiens et les paysages au coucher du soleil — une silhouette qui se raconte aussi bien à l'arrêt qu'en mouvement." data-en="Model and creator. At the crossroads of fashion and music, between Parisian studios and sunset landscapes — a figure that tells its story as much in stillness as in motion.">Mannequin et créateur. À la croisée de la mode et de la musique, entre les ateliers parisiens et les paysages au coucher du soleil — une silhouette qui se raconte aussi bien à l'arrêt qu'en mouvement.</p>
+    <div class="meta">
+      <div><span data-fr="Origine" data-en="Origin">Origine</span><b data-fr="Paris, FR" data-en="Paris, FR">Paris, FR</b></div>
+      <div><span data-fr="Taille" data-en="Height">Taille</span><b data-fr="1,87 m" data-en="1.87 m">1,87 m</b></div>
+      <div><span data-fr="Représentation" data-en="Representation">Représentation</span><b data-fr="Sur demande" data-en="On request">Sur demande</b></div>
+    </div>
+  </div>
+  <div class="photo carousel" id="hero-carousel">
+    <div class="slide on">
+      <img src="photos/car-1.jpg" alt="L'Officiel — Couverture" loading="eager">
+      <div class="photo-tag" data-fr="01 — L'Officiel · Couverture" data-en="01 — L'Officiel · Cover">01 — L'Officiel · Couverture</div>
+      <div class="photo-cap" data-fr="« Blazer cognac,<br>vent du désert. »" data-en="« Cognac blazer,<br>desert wind. »">« Blazer cognac,<br>vent du désert. »</div>
+    </div>
+    <div class="slide">
+      <img src="photos/car-2.jpg" alt="L'Officiel — Death Valley" loading="lazy">
+      <div class="photo-tag" data-fr="02 — Death Valley · Foulard de soie" data-en="02 — Death Valley · Silk scarf">02 — Death Valley · Foulard de soie</div>
+      <div class="photo-cap" data-fr="« L'heure dorée<br>au cœur de la vallée. »" data-en="« Golden hour<br>in the heart of the valley. »">« L'heure dorée<br>au cœur de la vallée. »</div>
+    </div>
+    <div class="slide">
+      <img src="photos/car-3.jpg" alt="L'Officiel — Plan large" loading="lazy">
+      <div class="photo-tag" data-fr="03 — California · Plan large" data-en="03 — California · Wide shot">03 — California · Plan large</div>
+      <div class="photo-cap" data-fr="« Une silhouette<br>dans les dunes. »" data-en="« A silhouette<br>in the dunes. »">« Une silhouette<br>dans les dunes. »</div>
+    </div>
+    <div class="slide">
+      <img src="photos/car-4.jpg" alt="L'Officiel — California" loading="lazy">
+      <div class="photo-tag" data-fr="04 — California · L'Officiel" data-en="04 — California · L'Officiel">04 — California · L'Officiel</div>
+      <div class="photo-cap" data-fr="« Le silence<br>du désert. »" data-en="« The silence<br>of the desert. »">« Le silence<br>du désert. »</div>
+    </div>
+    <div class="slide">
+      <img src="photos/car-5.jpg" alt="L'Officiel — Badwater" loading="lazy">
+      <div class="photo-tag" data-fr="05 — Death Valley · La traversée" data-en="05 — Death Valley · The Crossing">05 — Death Valley · La traversée</div>
+      <div class="photo-cap" data-fr="« Marcher seul,<br>face à l'immensité. »" data-en="« Walking alone,<br>facing the vastness. »">« Marcher seul,<br>face à l'immensité. »</div>
+    </div>
+    <div class="carousel-dots" aria-label="Navigation carrousel">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+<!-- EDITORIAL STRIP -->
+<section class="strip">
+  <h2 data-fr="Un univers <em>en trois actes.</em>" data-en="A universe <em>in three acts.</em>">Un univers <em>en trois actes.</em></h2>
+  <div class="col">
+    <h4 data-fr="Book" data-en="Book">Book</h4>
+    <p data-fr="Une sélection rigoureuse d'éditoriaux et de portraits — l'image arrêtée comme matière première du travail." data-en="A rigorous selection of editorials and portraits — the still image as the raw material of the work.">Une sélection rigoureuse d'éditoriaux et de portraits — l'image arrêtée comme matière première du travail.</p>
+  </div>
+  <div class="col">
+    <h4 data-fr="Portefeuille UGC" data-en="UGC Portfolio">Portefeuille UGC</h4>
+    <p data-fr="Campagnes, collaborations marques et projets commerciaux. Le commercial vu comme prolongement naturel du regard éditorial." data-en="Campaigns, brand collaborations and commercial projects. Commercial work seen as a natural extension of the editorial eye.">Campagnes, collaborations marques et projets commerciaux. Le commercial vu comme prolongement naturel du regard éditorial.</p>
+  </div>
+  <div class="col">
+    <h4 data-fr="Vidéos musicales" data-en="Music Videos">Vidéos musicales</h4>
+    <p data-fr="L'image en mouvement, montée sur des compositions originales. Un terrain de jeu où la mode rencontre le son." data-en="Moving images, set to original compositions. A playground where fashion meets sound.">L'image en mouvement, montée sur des compositions originales. Un terrain de jeu où la mode rencontre le son.</p>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-label="Marques et publications">
+  <div class="marquee-track">
+    <span><em>L'Officiel Homme</em> <span class="sep">✦</span></span>
+    <span>Tommy Hilfiger <span class="sep">✦</span></span>
+    <span>Musu <span class="sep">✦</span></span>
+    <span>Ritz Paris <span class="sep">✦</span></span>
+    <span>Le Coq Sportif <span class="sep">✦</span></span>
+    <span>Nikon <span class="sep">✦</span></span>
+    <span>Celio <span class="sep">✦</span></span>
+    <span>Club Med <span class="sep">✦</span></span>
+    <span>Gaston Luga <span class="sep">✦</span></span>
+    <span>Casio <span class="sep">✦</span></span>
+    <span>Decathlon <span class="sep">✦</span></span>
+    <span><em>L'Officiel Homme</em> <span class="sep">✦</span></span>
+    <span>Tommy Hilfiger <span class="sep">✦</span></span>
+    <span>Musu <span class="sep">✦</span></span>
+    <span>Ritz Paris <span class="sep">✦</span></span>
+    <span>Le Coq Sportif <span class="sep">✦</span></span>
+    <span>Nikon <span class="sep">✦</span></span>
+    <span>Celio <span class="sep">✦</span></span>
+    <span>Club Med <span class="sep">✦</span></span>
+    <span>Gaston Luga <span class="sep">✦</span></span>
+    <span>Casio <span class="sep">✦</span></span>
+    <span>Decathlon <span class="sep">✦</span></span>
+  </div>
+</div>
+
+<!-- PRESS — L'OFFICIEL FEATURE -->
+<section class="press" id="press">
+  <div class="press-left">
+    <img src="photos/officiel-gris.jpg" alt="L'Officiel Lithuania — Death Valley, costume gris" loading="lazy">
+  </div>
+  <div class="press-right">
+    <div class="press-pub">L'Officiel <em>Lithuania</em></div>
+    <h3 data-fr="Death Valley — <em>une silhouette<br>à l'heure dorée.</em>" data-en="Death Valley — <em>a silhouette<br>at golden hour.</em>">Death Valley — <em>une silhouette<br>à l'heure dorée.</em></h3>
+    <p data-fr="Éditorial publié dans <em>L'Officiel Lithuania</em>. Costume tailleur, foulards de soie et lumière du désert californien — un dialogue entre tailoring parisien et nature minérale, à découvrir en 8 pages dans le numéro." data-en="Editorial published in <em>L'Officiel Lithuania</em>. Tailored suit, silk scarves and Californian desert light — a dialogue between Parisian tailoring and mineral nature, across 8 pages in the issue.">
+      Éditorial publié dans <em>L'Officiel Lithuania</em>. Costume tailleur, foulards de soie et lumière du désert
+      californien — un dialogue entre tailoring parisien et nature minérale, à découvrir en 8 pages dans le numéro.
+    </p>
+    <div class="press-second">
+      <img src="photos/officiel-turquoise.jpg" alt="L'Officiel Lithuania — Death Valley, blazer turquoise" loading="lazy">
+    </div>
+    <div class="press-meta">
+      <div><span data-fr="Publication" data-en="Publication">Publication</span><b>L'Officiel</b></div>
+      <div><span data-fr="Pays" data-en="Country">Pays</span><b data-fr="Lituanie" data-en="Lithuania">Lituanie</b></div>
+      <div><span data-fr="Pages" data-en="Pages">Pages</span><b data-fr="8 + cover" data-en="8 + cover">8 + cover</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<div class="section-head" id="book">
+  <h3 data-fr="Le <em>Book</em> — Sélection 2024–26" data-en="The <em>Book</em> — Selection 2024–26">Le <em>Book</em> — Sélection 2024–26</h3>
+  <span class="mono" data-fr="27 entrées · voir tout →" data-en="27 entries · view all →">27 entrées · voir tout →</span>
+</div>
+<div class="grid">
+  <div class="tile t1"><img src="photos/book-01.jpg" alt="" loading="lazy"><span data-fr="01 — Crème brodé · Rideau" data-en="01 — Embroidered Cream · Curtain">01 — Crème brodé · Rideau</span></div>
+  <div class="tile t2"><img src="photos/book-02.jpg" alt="" loading="lazy"><span data-fr="02 — V-Neck Tennis · Tabouret" data-en="02 — V-Neck Tennis · Stool">02 — V-Neck Tennis · Tabouret</span></div>
+  <div class="tile t3"><img src="photos/book-03.jpg" alt="" loading="lazy"><span data-fr="03 — Porte Verte · Cuir Cognac" data-en="03 — Green Door · Cognac Leather">03 — Porte Verte · Cuir Cognac</span></div>
+  <div class="tile t4"><img src="photos/book-04.jpg" alt="" loading="lazy"><span data-fr="04 — Cuir Court · Rue de Paris" data-en="04 — Short Leather · Paris Street">04 — Cuir Court · Rue de Paris</span></div>
+  <div class="tile t5"><img src="photos/book-05.jpg" alt="" loading="lazy"><span data-fr="05 — Studio · Vert" data-en="05 — Studio · Green">05 — Studio · Vert</span></div>
+  <div class="tile t6"><img src="photos/book-06.jpg" alt="" loading="lazy"><span data-fr="06 — Bibliothèque · Nocturne" data-en="06 — Library · Nocturne">06 — Bibliothèque · Nocturne</span></div>
+  <div class="tile t7"><img src="photos/book-07.jpg" alt="" loading="lazy"><span data-fr="07 — Porte de Bois · Cuir" data-en="07 — Wooden Door · Leather">07 — Porte de Bois · Cuir</span></div>
+  <div class="tile t8"><img src="photos/book-08.jpg" alt="" loading="lazy"><span data-fr="08 — Atelier · Col Mao N&amp;B" data-en="08 — Studio · Mandarin Collar B&amp;W">08 — Atelier · Col Mao N&amp;B</span></div>
+  <div class="tile t9"><img src="photos/book-09.jpg" alt="" loading="lazy"><span data-fr="09 — Portrait · N&amp;B Close" data-en="09 — Portrait · B&amp;W Close">09 — Portrait · N&amp;B Close</span></div>
+  <div class="tile t10"><img src="photos/book-10.jpg" alt="" loading="lazy"><span data-fr="10 — Cuir Brun · Studio" data-en="10 — Brown Leather · Studio">10 — Cuir Brun · Studio</span></div>
+  <div class="tile t11"><img src="photos/book-11.jpg" alt="" loading="lazy"><span data-fr="11 — Jacquard · Pierre &amp; Citrons" data-en="11 — Jacquard · Stone &amp; Lemons">11 — Jacquard · Pierre &amp; Citrons</span></div>
+  <div class="tile t12"><img src="photos/book-12.jpg" alt="" loading="lazy"><span data-fr="12 — Voyage · Panorama" data-en="12 — Travel · Panorama">12 — Voyage · Panorama</span></div>
+  <div class="tile t13"><img src="photos/book-13.jpg" alt="" loading="lazy"><span data-fr="13 — William Wang · N&amp;B" data-en="13 — William Wang · B&amp;W">13 — William Wang · N&amp;B</span></div>
+  <div class="tile t14"><img src="photos/book-14.jpg" alt="" loading="lazy"><span data-fr="14 — Studio · Torse" data-en="14 — Studio · Torso">14 — Studio · Torse</span></div>
+  <div class="tile t15"><img src="photos/book-15.jpg" alt="" loading="lazy"><span data-fr="15 — Portrait · Atelier" data-en="15 — Portrait · Studio">15 — Portrait · Atelier</span></div>
+  <div class="tile t16"><img src="photos/book-16.jpg" alt="" loading="lazy"><span data-fr="16 — Voyage · Lumière" data-en="16 — Travel · Light">16 — Voyage · Lumière</span></div>
+  <div class="tile t17"><img src="photos/book-17.jpg" alt="" loading="lazy"><span data-fr="17 — William Wang · Profil" data-en="17 — William Wang · Profile">17 — William Wang · Profil</span></div>
+  <div class="tile t18"><img src="photos/book-18.jpg" alt="" loading="lazy"><span data-fr="18 — Archive · 2021" data-en="18 — Archive · 2021">18 — Archive · 2021</span></div>
+  <div class="tile t19"><img src="photos/book-19.jpg" alt="" loading="lazy"><span data-fr="19 — Atelier · Intime" data-en="19 — Studio · Intimate">19 — Atelier · Intime</span></div>
+  <div class="tile t20"><img src="photos/book-20.jpg" alt="" loading="lazy"><span data-fr="20 — Archive · 2023" data-en="20 — Archive · 2023">20 — Archive · 2023</span></div>
+  <div class="tile t21"><img src="photos/book-21.jpg" alt="" loading="lazy"><span data-fr="21 — Studio · Lumière" data-en="21 — Studio · Light">21 — Studio · Lumière</span></div>
+  <div class="tile t22"><img src="photos/book-22.jpg" alt="" loading="lazy"><span data-fr="22 — Sourire · Studio" data-en="22 — Smile · Studio">22 — Sourire · Studio</span></div>
+  <div class="tile t23"><img src="photos/book-23.jpg" alt="" loading="lazy"><span data-fr="23 — Été · Plein soleil" data-en="23 — Summer · Full sun">23 — Été · Plein soleil</span></div>
+  <div class="tile t24"><img src="photos/book-24.jpg" alt="" loading="lazy"><span data-fr="24 — Champ de blé · Campagne" data-en="24 — Wheat Field · Countryside">24 — Champ de blé · Campagne</span></div>
+  <div class="tile t25"><img src="photos/book-25.jpg" alt="" loading="lazy"><span data-fr="25 — Montre · Studio" data-en="25 — Watch · Studio">25 — Montre · Studio</span></div>
+  <div class="tile t26"><img src="photos/book-26.jpg" alt="" loading="lazy"><span data-fr="26 — Lunettes · Studio" data-en="26 — Sunglasses · Studio">26 — Lunettes · Studio</span></div>
+  <div class="tile t27"><img src="photos/book-27.jpg" alt="" loading="lazy"><span data-fr="27 — Portrait · Col montant" data-en="27 — Portrait · Mandarin Collar">27 — Portrait · Col montant</span></div>
+</div>
+
+<!-- UGC — Portefeuille création de contenu -->
+<section class="ugc" id="ugc">
+  <div class="ugc-head">
+    <h3 data-fr="Portefeuille <em>UGC</em> — Création de contenu" data-en="<em>UGC</em> Portfolio — Content Creation">Portefeuille <em>UGC</em> — Création de contenu</h3>
+    <span class="mono" data-fr="Sélection" data-en="Selection">Sélection</span>
+  </div>
+  <p class="ugc-lede" data-fr="Création de contenu pour marques : formats verticaux, lifestyle, produit en situation. Du Reel Instagram à la campagne digitale, je façonne des récits courts qui parlent autant au studio qu'à la communauté de la marque." data-en="Content creation for brands: vertical formats, lifestyle, product in context. From Instagram Reels to digital campaigns, I craft short narratives that speak to the studio and the brand's community alike.">
+    Création de contenu pour marques : formats verticaux, lifestyle, produit en situation. Du Reel Instagram à la campagne digitale, je façonne des récits courts qui parlent autant au studio qu'à la communauté de la marque.
+  </p>
+  <div class="ugc-grid">
+
+    <div class="ugc-card has-video" data-video="videos/gaston-nikon.mp4" data-title="Gaston Luga × Nikon" data-tag="Cross-collab · 2024">
+      <div class="ugc-thumb u6">
+        <video class="ugc-preview" src="videos/gaston-nikon.mp4" muted loop autoplay playsinline preload="metadata"></video>
+        <button class="play-mini" aria-label="Lecture vidéo">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>
+        </button>
+        <span class="ugc-live" data-fr="Vidéo" data-en="Video">Vidéo</span>
+      </div>
+      <div class="ugc-info">
+        <span class="ugc-tag" data-fr="Cross-collab · 2024" data-en="Cross-collab · 2024">Cross-collab · 2024</span>
+        <h4>Gaston Luga <em>×</em> Nikon</h4>
+        <p data-fr="Reel produit — sac en cuir Gaston Luga, capturé à l'objectif Nikon Z series." data-en="Product Reel — Gaston Luga leather bag, shot on a Nikon Z series lens.">Reel produit — sac en cuir Gaston Luga, capturé à l'objectif Nikon Z series.</p>
+      </div>
+    </div>
+
+    <div class="ugc-card has-video" data-video="videos/musu.mp4" data-title="Musu" data-tag="Eyewear · 2025">
+      <div class="ugc-thumb u1">
+        <video class="ugc-preview" src="videos/musu.mp4" muted loop autoplay playsinline preload="metadata"></video>
+        <button class="play-mini" aria-label="Lecture vidéo">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>
+        </button>
+        <span class="ugc-live" data-fr="Vidéo" data-en="Video">Vidéo</span>
+      </div>
+      <div class="ugc-info">
+        <span class="ugc-tag" data-fr="Lunettes · 2025" data-en="Eyewear · 2025">Lunettes · 2025</span>
+        <h4>Musu</h4>
+        <p data-fr="Reel produit — collection de lunettes solaires, lumière naturelle." data-en="Product Reel — sunglasses collection, natural light.">Reel produit — collection de lunettes solaires, lumière naturelle.</p>
+      </div>
+    </div>
+
+    <div class="ugc-card has-video" data-video="videos/kompsos.mp4" data-title="Kompsos" data-tag="Jewellery · 2025">
+      <div class="ugc-thumb u9">
+        <video class="ugc-preview" src="videos/kompsos.mp4" muted loop autoplay playsinline preload="metadata"></video>
+        <button class="play-mini" aria-label="Lecture vidéo">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>
+        </button>
+        <span class="ugc-live" data-fr="Vidéo" data-en="Video">Vidéo</span>
+      </div>
+      <div class="ugc-info">
+        <span class="ugc-tag" data-fr="Bijoux · 2025" data-en="Jewellery · 2025">Bijoux · 2025</span>
+        <h4>Kompsos</h4>
+        <p data-fr="Reel produit — bagues, bracelets et colliers, plans macro." data-en="Product Reel — rings, bracelets and necklaces, macro shots.">Reel produit — bagues, bracelets et colliers, plans macro.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section class="music" id="musique">
+  <div class="music-video">
+    <video controls preload="metadata" playsinline poster="photos/musique-cover.jpg">
+      <source src="videos/musique.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div>
+    <h3 data-fr="La <em>musique</em><br>comme seconde<br>peau." data-en="<em>Music</em><br>as a second<br>skin.">La <em>musique</em><br>comme seconde<br>peau.</h3>
+    <p data-fr="Créateur musical — chanteur et guitariste, acoustique comme électrique. Je compose mes propres morceaux, entre pop, R&amp;B et rock, dans la veine de Post Malone, The Kid LAROI ou Justin Bieber." data-en="Music creator — singer and guitarist, acoustic and electric. I write and compose my own tracks, between pop, R&amp;B and rock, in the vein of Post Malone, The Kid LAROI and Justin Bieber.">
+      Créateur musical — chanteur et guitariste, acoustique comme électrique. Je compose mes propres morceaux, entre pop, R&amp;B et rock, dans la veine de Post Malone, The Kid LAROI ou Justin Bieber.
+    </p>
+    <div class="sc-tracks">
+
+      <div class="player sc-track">
+        <button class="play sc-toggle" aria-label="Lecture / Pause">
+          <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>
+          <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <div class="track">
+          <b>Circles <em>(Acoustic)</em></b>
+          <span data-fr="Tim Adrien · reprise de Post Malone" data-en="Tim Adrien · Post Malone cover">Tim Adrien · reprise de Post Malone</span>
+        </div>
+        <div class="wave" aria-hidden="true">
+          <i style="animation-delay:.0s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.10s"></i><i style="animation-delay:.15s"></i>
+          <i style="animation-delay:.20s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.30s"></i><i style="animation-delay:.35s"></i>
+          <i style="animation-delay:.40s"></i><i style="animation-delay:.45s"></i><i style="animation-delay:.50s"></i><i style="animation-delay:.55s"></i>
+          <i style="animation-delay:.60s"></i><i style="animation-delay:.65s"></i><i style="animation-delay:.70s"></i><i style="animation-delay:.75s"></i>
+          <i style="animation-delay:.80s"></i><i style="animation-delay:.85s"></i><i style="animation-delay:.90s"></i><i style="animation-delay:.95s"></i>
+          <i style="animation-delay:1.0s"></i><i style="animation-delay:1.05s"></i><i style="animation-delay:1.10s"></i><i style="animation-delay:1.15s"></i>
+        </div>
+        <iframe class="sc-frame" allow="autoplay" tabindex="-1" aria-hidden="true"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/timadrien/circles-acoustic&color=%239c5a38&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_teaser=false"
+          style="position:absolute;left:-9999px;width:1px;height:1px;border:0;opacity:0"></iframe>
+      </div>
+
+      <div class="player sc-track">
+        <button class="play sc-toggle" aria-label="Lecture / Pause">
+          <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>
+          <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <div class="track">
+          <b>Knockin' on Heaven's Door <em>(Acoustic)</em></b>
+          <span data-fr="Tim Adrien · reprise de Bob Dylan" data-en="Tim Adrien · Bob Dylan cover">Tim Adrien · reprise de Bob Dylan</span>
+        </div>
+        <div class="wave" aria-hidden="true">
+          <i style="animation-delay:.0s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.10s"></i><i style="animation-delay:.15s"></i>
+          <i style="animation-delay:.20s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.30s"></i><i style="animation-delay:.35s"></i>
+          <i style="animation-delay:.40s"></i><i style="animation-delay:.45s"></i><i style="animation-delay:.50s"></i><i style="animation-delay:.55s"></i>
+          <i style="animation-delay:.60s"></i><i style="animation-delay:.65s"></i><i style="animation-delay:.70s"></i><i style="animation-delay:.75s"></i>
+          <i style="animation-delay:.80s"></i><i style="animation-delay:.85s"></i><i style="animation-delay:.90s"></i><i style="animation-delay:.95s"></i>
+          <i style="animation-delay:1.0s"></i><i style="animation-delay:1.05s"></i><i style="animation-delay:1.10s"></i><i style="animation-delay:1.15s"></i>
+        </div>
+        <iframe class="sc-frame" allow="autoplay" tabindex="-1" aria-hidden="true"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/timadrien/knockin-on-heavens-door-acoustic&color=%239c5a38&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_teaser=false"
+          style="position:absolute;left:-9999px;width:1px;height:1px;border:0;opacity:0"></iframe>
+      </div>
+
+      <div class="player sc-track">
+        <button class="play sc-toggle" aria-label="Lecture / Pause">
+          <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>
+          <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <div class="track">
+          <b>Feeling Whitney <em>(Acoustic)</em></b>
+          <span data-fr="Tim Adrien · reprise de Post Malone" data-en="Tim Adrien · Post Malone cover">Tim Adrien · reprise de Post Malone</span>
+        </div>
+        <div class="wave" aria-hidden="true">
+          <i style="animation-delay:.0s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.10s"></i><i style="animation-delay:.15s"></i>
+          <i style="animation-delay:.20s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.30s"></i><i style="animation-delay:.35s"></i>
+          <i style="animation-delay:.40s"></i><i style="animation-delay:.45s"></i><i style="animation-delay:.50s"></i><i style="animation-delay:.55s"></i>
+          <i style="animation-delay:.60s"></i><i style="animation-delay:.65s"></i><i style="animation-delay:.70s"></i><i style="animation-delay:.75s"></i>
+          <i style="animation-delay:.80s"></i><i style="animation-delay:.85s"></i><i style="animation-delay:.90s"></i><i style="animation-delay:.95s"></i>
+          <i style="animation-delay:1.0s"></i><i style="animation-delay:1.05s"></i><i style="animation-delay:1.10s"></i><i style="animation-delay:1.15s"></i>
+        </div>
+        <iframe class="sc-frame" allow="autoplay" tabindex="-1" aria-hidden="true"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/timadrien/feeling-whitney&color=%239c5a38&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_teaser=false"
+          style="position:absolute;left:-9999px;width:1px;height:1px;border:0;opacity:0"></iframe>
+      </div>
+
+    </div>
+    <a class="sc-link" href="https://soundcloud.com/timadrien" target="_blank" rel="noopener" data-fr="Tous les morceaux sur SoundCloud →" data-en="All tracks on SoundCloud →">Tous les morceaux sur SoundCloud →</a>
+  </div>
+</section>
+
+<!-- BIO -->
+<section class="bio" id="about">
+  <div class="bio-photo">
+    <img src="photos/bio-miroir.jpg" alt="Portrait Timothée Adrien — miroir" loading="lazy">
+  </div>
+  <div class="bio-text">
+    <h3 data-fr="L'image<br>et le <em>son</em>, comme<br>deux versants<br>du même geste." data-en="Image<br>and <em>sound</em>, as<br>two sides<br>of one gesture.">L'image<br>et le <em>son</em>, comme<br>deux versants<br>du même geste.</h3>
+    <p data-fr="Né et basé à Paris. Je travaille comme mannequin depuis quatre ans, parallèlement à une pratique musicale qui m'amène à composer pour mes propres films courts. L'éditorial, la grande campagne et la vidéo ne sont pour moi qu'un seul même geste, décliné dans trois temporalités." data-en="Born and based in Paris. I have worked as a model for four years, alongside a music practice that leads me to compose for my own short films. Editorial, campaign and video are, to me, one and the same gesture, expressed across three timeframes.">
+      Né et basé à Paris. Je travaille comme mannequin depuis quatre ans, parallèlement à une pratique
+      musicale qui m'amène à composer pour mes propres films courts. L'éditorial, la grande campagne et la
+      vidéo ne sont pour moi qu'un seul même geste, décliné dans trois temporalités.
+    </p>
+    <p data-fr="Je travaille volontiers en collaboration longue avec stylistes, photographes et réalisateurs partageant cette vision transversale." data-en="I gladly work in long-term collaboration with stylists, photographers and directors who share this cross-disciplinary vision.">
+      Je travaille volontiers en collaboration longue avec stylistes, photographes et réalisateurs partageant
+      cette vision transversale.
+    </p>
+    <div class="bio-stats">
+      <div><span data-fr="Taille" data-en="Height">Taille</span><b data-fr="187 cm" data-en="187 cm">187 cm</b></div>
+      <div><span data-fr="Poids" data-en="Weight">Poids</span><b data-fr="77 kg" data-en="77 kg">77 kg</b></div>
+      <div><span data-fr="Poitrine" data-en="Chest">Poitrine</span><b data-fr="98 cm" data-en="98 cm">98 cm</b></div>
+      <div><span data-fr="Tour de taille" data-en="Waist">Tour de taille</span><b data-fr="78 cm" data-en="78 cm">78 cm</b></div>
+      <div><span data-fr="Hanches" data-en="Hips">Hanches</span><b data-fr="97 cm" data-en="97 cm">97 cm</b></div>
+      <div><span data-fr="Confection" data-en="Suit">Confection</span><b data-fr="50" data-en="50 EU">50</b></div>
+      <div><span data-fr="Pointure" data-en="Shoe">Pointure</span><b data-fr="43" data-en="43 EU">43</b></div>
+      <div><span data-fr="Cheveux" data-en="Hair">Cheveux</span><b data-fr="Blond" data-en="Blond">Blond</b></div>
+      <div><span data-fr="Yeux" data-en="Eyes">Yeux</span><b data-fr="Noisette" data-en="Hazel">Noisette</b></div>
+      <div><span data-fr="Tatouages" data-en="Tattoos">Tatouages</span><b data-fr="Aucun" data-en="None">Aucun</b></div>
+      <div><span data-fr="Piercings" data-en="Piercings">Piercings</span><b data-fr="Aucun" data-en="None">Aucun</b></div>
+      <div><span data-fr="Langues" data-en="Languages">Langues</span><b data-fr="FR · EN · IT" data-en="FR · EN · IT">FR · EN · IT</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div>
+    <h5 data-fr="Contact" data-en="Contact">Contact</h5>
+    <p data-fr="Pour toute demande de booking, presse ou collaboration musicale." data-en="For booking, press or music collaboration enquiries.">Pour toute demande de booking, presse ou collaboration musicale.</p>
+    <p><a href="mailto:timotheemgt@gmail.com">timotheemgt@gmail.com</a></p>
+  </div>
+  <div>
+    <h5 data-fr="Suivre" data-en="Follow">Suivre</h5>
+    <p><a href="https://www.instagram.com/timmyname/" target="_blank" rel="noopener">Instagram</a></p>
+    <p><a href="https://adrientim.book.fr/" target="_blank" rel="noopener">Book.fr</a></p>
+    <p><a href="https://soundcloud.com/timadrien" target="_blank" rel="noopener">SoundCloud</a></p>
+  </div>
+  <div>
+    <h5 data-fr="Représentation" data-en="Representation">Représentation</h5>
+    <p data-fr="Disponible sur demande<br>Paris · Milan · New York" data-en="Available on request<br>Paris · Milan · New York">Disponible sur demande<br>Paris · Milan · New York</p>
+  </div>
+  <div>
+    <h5 data-fr="Édition" data-en="Edition">Édition</h5>
+    <p data-fr="Maison — n°01<br>Printemps 2026<br>Tous droits réservés." data-en="Maison — No.01<br>Spring 2026<br>All rights reserved.">Maison — n°01<br>Printemps 2026<br>Tous droits réservés.</p>
+  </div>
+  <div class="copy">
+    <span>© 2026 Timothée Adrien</span>
+    <span data-fr="Direction Artistique — Maison" data-en="Art Direction — Maison">Direction Artistique — Maison</span>
+  </div>
+</footer>
+
+<script src="https://w.soundcloud.com/player/api.js"></script>
+
+<!-- Lightbox vidéo (apparaît au clic sur une carte UGC) -->
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">×</button>
+  <div class="lightbox-content">
+    <video id="lightbox-video" controls playsinline preload="metadata"></video>
+    <div class="lightbox-info">
+      <span class="lightbox-tag" id="lightbox-tag"></span>
+      <h4 class="lightbox-title" id="lightbox-title"></h4>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Cache les images cassées proprement — les dégradés en fond prennent le relais
+  (function(){
+    function flag(img){ img.classList.add('is-broken'); }
+    document.querySelectorAll('img').forEach(function(img){
+      img.addEventListener('error', function(){ flag(img); });
+      if(img.complete && img.naturalWidth === 0){ flag(img); }
+    });
+  })();
+
+  // Bilingue FR / EN — bascule instantanée + mémorisation
+  (function(){
+    var btns = document.querySelectorAll('.lang-btn');
+    function setLang(lang){
+      document.querySelectorAll('[data-'+lang+']').forEach(function(el){
+        el.innerHTML = el.getAttribute('data-'+lang);
+      });
+      document.documentElement.lang = lang;
+      btns.forEach(function(b){ b.classList.toggle('active', b.dataset.lang === lang); });
+      try{ localStorage.setItem('ta-lang', lang); }catch(e){}
+    }
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){ setLang(b.dataset.lang); });
+    });
+    var saved = 'fr';
+    try{ saved = localStorage.getItem('ta-lang') || 'fr'; }catch(e){}
+    setLang(saved);
+  })();
+
+  // Carrousel L'Officiel California — rotation auto + clic sur les puces
+  (function(){
+    var slides = document.querySelectorAll('#hero-carousel .slide');
+    var dots = document.querySelectorAll('#hero-carousel .carousel-dots .dot');
+    if(!slides.length) return;
+    var i = 0;
+    var timer;
+
+    function show(n){
+      slides[i].classList.remove('on');
+      if(dots[i]) dots[i].classList.remove('active');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('on');
+      if(dots[i]) dots[i].classList.add('active');
+    }
+
+    function next(){ show(i+1); }
+
+    function start(){ timer = setInterval(next, 4500); }
+    function stop(){ clearInterval(timer); }
+
+    dots.forEach(function(dot, idx){
+      dot.addEventListener('click', function(){
+        stop(); show(idx); start();
+      });
+    });
+
+    start();
+  })();
+
+  // Lecteurs SoundCloud sur-mesure (playlist) — pilotent la lecture via la Widget API
+  (function(){
+    if(!window.SC || !SC.Widget) return;
+    var entries = [];
+    document.querySelectorAll('.sc-track').forEach(function(row){
+      var frame = row.querySelector('.sc-frame');
+      var btn = row.querySelector('.sc-toggle');
+      if(!frame || !btn) return;
+      var widget = SC.Widget(frame);
+      var entry = { row: row, widget: widget };
+      entries.push(entry);
+      widget.bind(SC.Widget.Events.PLAY, function(){
+        row.classList.add('is-playing');
+        entries.forEach(function(e){ if(e !== entry){ e.widget.pause(); } });
+      });
+      widget.bind(SC.Widget.Events.PAUSE,  function(){ row.classList.remove('is-playing'); });
+      widget.bind(SC.Widget.Events.FINISH, function(){ row.classList.remove('is-playing'); });
+      btn.addEventListener('click', function(){ widget.toggle(); });
+    });
+  })();
+
+  // Lightbox vidéo UGC — clic sur une carte avec data-video pour lancer la vidéo en grand
+  (function(){
+    var lightbox = document.getElementById('lightbox');
+    var video = document.getElementById('lightbox-video');
+    var titleEl = document.getElementById('lightbox-title');
+    var tagEl = document.getElementById('lightbox-tag');
+    var closeBtn = document.getElementById('lightbox-close');
+    if(!lightbox || !video) return;
+
+    function open(card){
+      var src = card.dataset.video;
+      var title = card.dataset.title || (card.querySelector('h4') ? card.querySelector('h4').textContent : '');
+      var tag = card.dataset.tag || (card.querySelector('.ugc-tag') ? card.querySelector('.ugc-tag').textContent : '');
+      video.src = src;
+      titleEl.innerHTML = title.replace(/×/g, '<em>×</em>');
+      tagEl.textContent = tag;
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      // Met en pause tous les aperçus pour libérer le décodage vidéo
+      document.querySelectorAll('.ugc-preview').forEach(function(v){ try{ v.pause(); }catch(e){} });
+      video.play().catch(function(){});
+    }
+
+    function close(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+      document.body.style.overflow = '';
+      // Relance les aperçus visibles
+      document.querySelectorAll('.ugc-preview').forEach(function(v){ try{ v.play().catch(function(){}); }catch(e){} });
+    }
+
+    document.querySelectorAll('.ugc-card.has-video, .ugc-card[data-video]').forEach(function(card){
+      card.addEventListener('click', function(){ open(card); });
+    });
+
+    closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', function(e){
+      if(e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && lightbox.classList.contains('open')) close();
+    });
+  })();
+
+  // Performance — ne lit les aperçus UGC que lorsqu'ils sont visibles à l'écran
+  (function(){
+    var previews = document.querySelectorAll('.ugc-preview');
+    if(!previews.length || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var v = e.target;
+        if(e.isIntersecting){ v.play().catch(function(){}); }
+        else { try{ v.pause(); }catch(err){} }
+      });
+    }, { threshold: 0.2 });
+    previews.forEach(function(v){ io.observe(v); });
+  })();
+</script>
+
+</body>
+</html>
