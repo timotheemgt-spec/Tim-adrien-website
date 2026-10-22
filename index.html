@@ -260,6 +260,19 @@
   .contact{background:var(--ink);animation:none}
   .contact::before,.contact::after{display:none}
   .contact .big{color:rgba(255,255,255,.07)}
+  /* Presse : photo pleine largeur, texte sur un panneau translucide (verre dépoli) */
+  .press{display:block;position:relative;min-height:86vh;overflow:hidden}
+  .press-ph{position:absolute;inset:0}
+  .press-ph img{object-position:72% 32%}
+  .press-q{position:relative;z-index:1;width:min(540px,44%);margin:9vh 0 9vh var(--gx);padding:5vh clamp(22px,2.6vw,40px);background:rgba(4,30,44,.34);-webkit-backdrop-filter:blur(14px) saturate(1.15);backdrop-filter:blur(14px) saturate(1.15);border:1px solid rgba(255,255,255,.22);animation:none;gap:28px}
+  .press-q::before,.press-q::after{display:none}
+  .press-q blockquote{font-size:clamp(26px,2.8vw,46px)}
+  @media (max-width:900px){
+    .press{min-height:0;display:flex;flex-direction:column-reverse;background:var(--ink)}
+    .press-ph{position:relative;inset:auto;height:62vh}
+    .press-ph img{object-position:84% 30%}
+    .press-q{width:auto;margin:-18vh 16px 24px;padding:28px 22px}
+  }
 </style>
 <script>try{if(sessionStorage.getItem('ta-studio-intro')!=='1')document.documentElement.classList.add('is-intro')}catch(e){document.documentElement.classList.add('is-intro')}</script>
 </head>
