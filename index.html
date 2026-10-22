@@ -76,10 +76,13 @@
   .hero-name .wdw{display:inline-block;white-space:nowrap}
 
   /* ---------- MARQUEE ---------- */
-  .marquee{background:var(--ink);color:#fff;overflow:hidden;padding:22px 0;white-space:nowrap}
-  .marquee-track{display:inline-flex;gap:48px;animation:mq 38s linear infinite;padding-left:48px}
-  .marquee span{font-family:'Inter Tight';font-weight:600;font-size:clamp(22px,2.6vw,36px);text-transform:uppercase;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:48px}
-  .marquee span::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--red)}
+  .marquee{background:var(--ink);color:#fff;overflow:hidden;padding:30px 0;white-space:nowrap}
+  .marquee-track{display:inline-flex;align-items:center;gap:84px;animation:mq 42s linear infinite;padding-left:84px}
+  /* logos des marques, tous passés en blanc pour une lecture homogène */
+  .marquee{--k:1}
+  .marquee img{height:calc(var(--h,30px) * var(--k));width:auto;max-width:none;flex:none;filter:brightness(0) invert(1);opacity:.82;transition:opacity .3s}
+  .marquee img.w{filter:none}
+  .marquee img:hover{opacity:1}
   @keyframes mq{to{transform:translateX(-50%)}}
 
   /* ---------- MANIFESTE ---------- */
@@ -178,6 +181,8 @@
   /* ---------- MOBILE ---------- */
   @media (max-width:900px){
     nav{display:none}
+    .marquee{--k:.7;padding:22px 0}
+    .marquee-track{gap:52px;padding-left:52px}
     .hero{grid-template-columns:1fr;height:100svh}
     .hero-photo{position:absolute;inset:0}
     .hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),transparent 30%,transparent 55%,rgba(0,0,0,.55))}
@@ -296,7 +301,7 @@
 <!-- MARQUEE -->
 <div class="marquee" aria-label="Collaborations">
   <div class="marquee-track" id="mq">
-    <span>L'Officiel Homme</span><span>Tommy Hilfiger</span><span>Ritz Paris</span><span>Nikon</span><span>Le Coq Sportif</span><span>Club Med</span><span>Musu</span><span>Gaston Luga</span><span>Celio</span><span>Casio</span><span>Decathlon</span>
+    <img src="photos/logos/lofficiel.svg" alt="L'Officiel Homme" style="--h:30px"><img src="photos/logos/tommy-white.png" alt="Tommy Hilfiger" class="w" style="--h:52px"><img src="photos/logos/ritz.svg" alt="Ritz Paris" style="--h:50px"><img src="photos/logos/nikon-white.png" alt="Nikon" class="w" style="--h:40px"><img src="photos/logos/coq.svg" alt="Le Coq Sportif" style="--h:26px"><img src="photos/logos/clubmed.svg" alt="Club Med" style="--h:28px"><img src="photos/logos/musu.png" alt="Musu" style="--h:34px"><img src="photos/logos/gaston.svg" alt="Gaston Luga" style="--h:18px"><img src="photos/logos/celio.svg" alt="Celio" style="--h:24px"><img src="photos/logos/casio.svg" alt="Casio" style="--h:22px"><img src="photos/logos/decathlon.svg" alt="Decathlon" style="--h:28px">
   </div>
 </div>
 
