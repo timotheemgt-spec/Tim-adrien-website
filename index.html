@@ -280,6 +280,10 @@
   .manifest h2 em{background:linear-gradient(0deg,#d81e05 0%,#ff5a00 18%,#ff9f1a 34%,#ffd257 48%,#ff9f1a 62%,#ff5a00 80%,#d81e05 100%);background-size:100% 300%;-webkit-box-decoration-break:clone;box-decoration-break:clone;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:flame 2.6s linear infinite,flicker 1.9s ease-in-out infinite}
   @keyframes flame{from{background-position:0% 0%}to{background-position:0% 150%}}
   @keyframes flicker{0%,100%{filter:drop-shadow(0 0 6px rgba(255,90,0,.35))}30%{filter:drop-shadow(0 0 14px rgba(255,120,0,.6))}55%{filter:drop-shadow(0 0 4px rgba(255,60,0,.3))}80%{filter:drop-shadow(0 0 11px rgba(255,150,30,.55))}}
+  /* intro : compteur plus petit, en effet feu (même flamme que « qui se raconte ») */
+  .intro .count{font-size:clamp(44px,6vw,96px);background:linear-gradient(0deg,#d81e05 0%,#ff5a00 18%,#ff9f1a 34%,#ffd257 48%,#ff9f1a 62%,#ff5a00 80%,#d81e05 100%);background-size:100% 300%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:flame 2.2s linear infinite,flicker 1.7s ease-in-out infinite;padding-right:.04em}
+  .intro .count span{color:inherit;-webkit-text-fill-color:transparent}
+  .intro .bar{background:linear-gradient(90deg,#d81e05,#ff5a00,#ff9f1a,#ffd257)}
 </style>
 <script>try{if(sessionStorage.getItem('ta-studio-intro')!=='1')document.documentElement.classList.add('is-intro')}catch(e){document.documentElement.classList.add('is-intro')}</script>
 </head>
