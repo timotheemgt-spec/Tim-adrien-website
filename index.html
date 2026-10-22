@@ -290,6 +290,9 @@
   /* « qui se raconte » : plus d'effet feu, contour blanc et intérieur noir */
   .manifest h2 em{background:none;color:var(--ink);-webkit-text-fill-color:var(--ink);-webkit-text-stroke:1.6px #fff;animation:none;filter:none}
   @media (max-width:900px){.manifest h2 em{-webkit-text-stroke-width:1px}}
+  /* intro : compteur en contour blanc, intérieur noir (plus d'effet feu) */
+  .intro .count,.intro .count span{background:none;color:var(--ink);-webkit-text-fill-color:var(--ink);-webkit-text-stroke:1.5px #fff;animation:none;filter:none}
+  .intro .bar{background:#fff}
 </style>
 <script>try{if(sessionStorage.getItem('ta-studio-intro')!=='1')document.documentElement.classList.add('is-intro')}catch(e){document.documentElement.classList.add('is-intro')}</script>
 </head>
