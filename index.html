@@ -7,7 +7,7 @@
 <meta name="description" content="Timothée Adrien · mannequin & création musicale · Paris. Book, éditoriaux, contenu de marque et musique." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@300;400;500&family=Hurricane&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   /* ============ TIMOTHÉE ADRIEN — version « Studio » (l'ancienne version reste sur /ancienne-version.html) ============ */
   :root{
@@ -260,12 +260,6 @@
   .contact{background:var(--ink);animation:none}
   .contact::before,.contact::after{display:none}
   .contact .big{color:rgba(255,255,255,.07)}
-  /* logo-signature « Tim Adrien » : écriture moderne, le trait de soulignement se dessine à l'arrivée */
-  .sigwrap{margin-top:5vh;display:inline-block;max-width:100%}
-  .contact .sign{font-family:'Hurricane','Snell Roundhand',cursive;font-weight:400;text-transform:none;letter-spacing:0;line-height:1;font-size:clamp(72px,11vw,180px);color:#fff;padding:0 .1em .05em 0;white-space:nowrap}
-  .swash{display:block;width:78%;height:clamp(14px,2vw,30px);margin:clamp(-26px,-1.8vw,-10px) 0 0 6%;overflow:visible}
-  .swash path{fill:none;stroke:var(--red);stroke-width:2.2;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s cubic-bezier(.6,0,.2,1) .35s}
-  .sigwrap.in .swash path{stroke-dashoffset:0}
 </style>
 <script>try{if(sessionStorage.getItem('ta-studio-intro')!=='1')document.documentElement.classList.add('is-intro')}catch(e){document.documentElement.classList.add('is-intro')}</script>
 </head>
@@ -417,7 +411,6 @@
     <div><span class="micro">©</span>2026 Timothée Adrien</div>
   </div>
   <p class="micro" style="margin-top:18px"><button type="button" class="replay" id="replay" data-fr="Rejouer l&#x27;intro ↺" data-en="Replay intro ↺">Rejouer l'intro ↺</button></p>
-  <div class="sigwrap fade" aria-hidden="true"><p class="sign">Tim Adrien</p><svg class="swash" viewBox="0 0 600 40" preserveAspectRatio="none"><path pathLength="1" d="M4 30 C 110 10, 250 4, 370 16 S 540 38, 596 8"/></svg></div>
 </section>
 
 <script>
