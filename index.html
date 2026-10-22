@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script>try{if(sessionStorage.getItem('ta-intro')!=='1'&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('is-intro')}catch(e){}</script>
 <style>
   :root{
     --ivory:#F2EBDD;
@@ -437,7 +438,7 @@
     .strip{grid-template-columns:1fr;padding:50px 22px}
     .strip h2,.strip .col{grid-column:auto}
     .press{grid-template-columns:1fr;padding:60px 22px}
-    .press-left{min-height:380px}
+    .press-left{min-height:380px;aspect-ratio:auto}
     .section-head{padding:60px 22px 20px}
     .grid{column-count:1;padding:0 22px 60px;column-gap:12px}
     .tile{margin-bottom:12px}
@@ -450,6 +451,41 @@
     nav ul{display:none}
     footer{grid-template-columns:1fr 1fr;padding:40px 22px 30px}
     header{padding:18px 22px}
+  }
+
+  /* Intro — compteur + défilement du book, la dernière photo rejoint le carrousel */
+  html.is-intro:not(.intro-ready)::before{content:"";position:fixed;inset:0;background:var(--ivory);z-index:94}
+  .is-intro body{overflow:hidden}
+  .is-intro #hero-carousel{visibility:hidden}
+  header{transition:opacity .8s ease}
+  .hero-left{transition:opacity 1s ease .1s,transform 1s cubic-bezier(.2,.7,.2,1) .1s}
+  .is-intro header{opacity:0}
+  .is-intro .hero-left{opacity:0;transform:translateY(26px)}
+  .intro{position:fixed;inset:0;z-index:95;background:var(--ivory);color:var(--ink);transition:background .7s ease .2s,opacity .4s ease}
+  .intro.out{background:transparent;pointer-events:none}
+  .intro .ui{position:absolute;inset:0;padding:24px 40px 34px;display:grid;grid-template-rows:auto 1fr auto;transition:opacity .4s ease}
+  .intro.out .ui,.intro.out .skip,.intro.out .label{opacity:0}
+  .intro .row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+  .intro .iname{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.04em}
+  .intro .sub{margin-top:8px;opacity:.55;font-size:10px}
+  .intro .icat{opacity:.65}
+  .intro .count{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(84px,15vw,220px);line-height:.8;letter-spacing:-.02em;font-variant-numeric:lining-nums tabular-nums}
+  .intro .count span{color:var(--cognac-deep);font-style:italic}
+  .intro .bar{position:absolute;left:0;bottom:0;height:2px;background:var(--cognac);width:0}
+  .intro .frame{position:fixed;left:50%;top:50%;width:clamp(160px,20vw,290px);aspect-ratio:4/5;transform:translate(-50%,-50%);overflow:hidden;
+    background:radial-gradient(ellipse at 30% 80%, #C97A4A 0%, #8E4A2C 35%, #3D2516 70%, #0E0805 100%);will-change:left,top,width,height}
+  .intro .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .intro .frame img.fit{object-fit:contain}
+  .intro .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(20,10,5,.45));opacity:0;transition:opacity 1s ease;pointer-events:none}
+  .intro .frame.fly::after{opacity:1}
+  .intro .frame.fly{transition:left 1s cubic-bezier(.76,0,.24,1),top 1s cubic-bezier(.76,0,.24,1),width 1s cubic-bezier(.76,0,.24,1),height 1s cubic-bezier(.76,0,.24,1),transform 1s cubic-bezier(.76,0,.24,1)}
+  .intro .frame.fade{transition:opacity .6s ease;opacity:0}
+  .intro .label{position:fixed;left:50%;top:calc(50% + clamp(160px,20vw,290px)*.625 + 16px);transform:translateX(-50%);white-space:nowrap;font-size:10px;transition:opacity .3s ease}
+  .intro .skip{position:absolute;right:40px;top:28px;background:none;border:0;padding:0;cursor:pointer;color:var(--ink);transition:color .2s ease,opacity .4s ease}
+  .intro .skip:hover{color:var(--cognac-deep)}
+  @media (max-width:900px){
+    .intro .ui{padding:20px 22px 30px}
+    .intro .skip{right:22px;top:24px}
   }
 </style>
 </head>
@@ -907,7 +943,116 @@
       });
     });
 
-    start();
+    if(document.documentElement.classList.contains('is-intro')){
+      document.addEventListener('ta-intro-done', start, { once:true });   // le carrousel démarre après l'intro
+    } else {
+      start();
+    }
+  })();
+
+  // Intro — compteur 000→100 + défilement du book ; la dernière photo rejoint le carrousel (une fois par session)
+  (function(){
+    var root = document.documentElement;
+    if(!root.classList.contains('is-intro')) return;
+    var hero = document.getElementById('hero-carousel');
+    var first = hero && hero.querySelector('.slide img');
+    if(!first){ root.classList.remove('is-intro'); return; }
+    var lang = root.lang === 'en' ? 'en' : 'fr';
+    var T = {
+      fr:{ sub:'Mannequin · Musique — Paris', skip:'Passer →' },
+      en:{ sub:'Model · Music — Paris', skip:'Skip →' }
+    }[lang];
+    function clean(s){ return (s||'').replace(/^\s*\d+\s*—\s*/, ''); }
+    var BOOK = ['book-30','book-21','book-28','book-03','book-29','book-06','book-11','book-31','book-23','book-04'];
+    var seq = [];
+    BOOK.forEach(function(id){
+      var img = document.querySelector('.tile img[src="photos/'+id+'.jpg"]');
+      if(!img) return;
+      var sp = img.parentNode.querySelector('span');
+      seq.push({ src:img.getAttribute('src'), label:clean(sp && (sp.getAttribute('data-'+lang) || sp.textContent)), cat:'(Book)' });
+    });
+    var tag = hero.querySelector('.slide .photo-tag');
+    seq.push({ src:first.getAttribute('src'), label:clean(tag && (tag.getAttribute('data-'+lang) || tag.textContent)), cat:"(L'Officiel)", last:true });
+
+    var el = document.createElement('div');
+    el.className = 'intro';
+    el.setAttribute('aria-hidden', 'true');
+    el.innerHTML =
+      '<div class="ui">' +
+        '<div class="row"><div><div class="iname">Timothée Adrien</div><div class="mono sub">'+T.sub+'</div></div></div>' +
+        '<div></div>' +
+        '<div class="row"><span class="mono icat" id="iCat">(Book)</span><div class="count"><span>0</span>00</div></div>' +
+      '</div>' +
+      '<button type="button" class="skip mono" id="iSkip">'+T.skip+'</button>' +
+      '<div class="frame" id="iFrame"></div><div class="label mono" id="iLabel"></div><div class="bar" id="iBar"></div>';
+    document.body.appendChild(el);
+    root.classList.add('intro-ready');
+
+    var frame = el.querySelector('#iFrame'), count = el.querySelector('.count'),
+        bar = el.querySelector('#iBar'), lab = el.querySelector('#iLabel'), cat = el.querySelector('#iCat');
+    var nodes = seq.map(function(s){
+      var a = new Image(); a.src = s.src; a.alt = '';
+      if(s.last) a.className = 'fit';   // même cadrage que le carrousel → atterrissage sans saut
+      return [a];
+    });
+    var done = false, ended = false, t0 = performance.now(), DUR = 2600;
+
+    function setCount(v){
+      var n = String(v); while(n.length < 3) n = '0' + n;
+      count.innerHTML = '<span>'+n[0]+'</span>'+n.slice(1);
+      bar.style.width = v + '%';
+    }
+    function show(k){
+      if(frame.dataset.k == k) return;
+      frame.dataset.k = k;
+      frame.innerHTML = '';
+      nodes[k].forEach(function(n){ frame.appendChild(n); });
+      lab.textContent = seq[k].label;
+      cat.textContent = seq[k].cat;
+    }
+    function tick(now){
+      if(done) return;
+      var p = Math.max(0, Math.min(1, (now - t0) / DUR)), e = 1 - Math.pow(1 - p, 3);
+      setCount(Math.round(e * 100));
+      show(Math.min(seq.length - 1, Math.floor(e * seq.length)));
+      if(p < 1) requestAnimationFrame(tick); else setTimeout(fly, 300);
+    }
+    function fly(){
+      if(done) return;
+      done = true;
+      var r = frame.getBoundingClientRect(), tg = hero.getBoundingClientRect();
+      el.classList.add('out');
+      if(tg.top < innerHeight * 0.5 && tg.bottom > 0){
+        frame.style.transform = 'none';
+        frame.style.left = r.left + 'px'; frame.style.top = r.top + 'px';
+        frame.style.width = r.width + 'px'; frame.style.height = r.height + 'px';
+        frame.offsetWidth;
+        frame.classList.add('fly');
+        frame.style.left = tg.left + 'px'; frame.style.top = tg.top + 'px';
+        frame.style.width = tg.width + 'px'; frame.style.height = tg.height + 'px';
+      } else {
+        frame.classList.add('fade');   // mobile : la photo du carrousel est sous le titre, on fond simplement
+      }
+      setTimeout(function(){ root.classList.remove('is-intro'); }, 650);
+      setTimeout(finish, 1150);
+    }
+    function finish(){
+      if(ended) return;
+      ended = true;
+      root.classList.remove('is-intro');
+      el.style.opacity = '0';
+      setTimeout(function(){
+        el.remove();
+        root.classList.remove('intro-ready');
+        document.dispatchEvent(new Event('ta-intro-done'));
+      }, 400);
+      try{ sessionStorage.setItem('ta-intro', '1'); }catch(e){}
+    }
+    el.querySelector('#iSkip').addEventListener('click', function(){
+      if(done) return;
+      setCount(100); show(seq.length - 1); fly();
+    });
+    requestAnimationFrame(tick);
   })();
 
   // Lecteurs SoundCloud sur-mesure (playlist) — pilotent la lecture via la Widget API
