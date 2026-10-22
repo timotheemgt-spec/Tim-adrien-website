@@ -235,6 +235,15 @@
   .intro .fly.go{transition:left 1.05s cubic-bezier(.76,0,.24,1),top 1.05s cubic-bezier(.76,0,.24,1),width 1.05s cubic-bezier(.76,0,.24,1),height 1.05s cubic-bezier(.76,0,.24,1)}
   .replay{background:none;border:0;color:inherit;font:inherit;cursor:pointer;padding:0;opacity:.75;text-decoration:underline;text-underline-offset:3px}
   .replay:hover{opacity:1}
+
+  /* dégradé « veste » vivant : le dégradé respire et deux vagues défilent en sens opposés */
+  .press-q,.contact{position:relative;isolation:isolate;background-size:170% 170%;animation:jacketShift 16s ease-in-out infinite alternate}
+  .press-q::before,.press-q::after,.contact::before,.contact::after{content:"";position:absolute;left:0;right:0;bottom:0;z-index:-1;pointer-events:none;background-repeat:repeat-x;background-position:0 100%}
+  .press-q::before,.contact::before{height:62%;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20200'%20preserveAspectRatio='none'%3E%3Cpath%20fill='rgba%284%2C40%2C60%2C0.38%29'%20d='M0%20110%20C%20200%2040%20400%2040%20600%20110%20S%201000%20180%201200%20110%20V200%20H0%20Z'/%3E%3C/svg%3E");background-size:1200px 100%;animation:waveA 22s linear infinite}
+  .press-q::after,.contact::after{height:48%;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201200%20200'%20preserveAspectRatio='none'%3E%3Cpath%20fill='rgba%2860%2C205%2C180%2C0.22%29'%20d='M0%2090%20C%20150%20150%20450%20150%20600%2090%20S%201050%2030%201200%2090%20V200%20H0%20Z'/%3E%3C/svg%3E");background-size:900px 100%;animation:waveB 15s linear infinite}
+  @keyframes jacketShift{0%{background-position:0% 0%}100%{background-position:100% 100%}}
+  @keyframes waveA{to{background-position:-1200px 100%}}
+  @keyframes waveB{to{background-position:900px 100%}}
 </style>
 <script>try{if(sessionStorage.getItem('ta-studio-intro')!=='1')document.documentElement.classList.add('is-intro')}catch(e){document.documentElement.classList.add('is-intro')}</script>
 </head>
