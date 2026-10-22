@@ -273,6 +273,9 @@
     .press-ph img{object-position:84% 30%}
     .press-q{width:auto;margin:-18vh 16px 24px;padding:28px 22px}
   }
+  /* « peau. » : couleur qui défile en continu sur tout le spectre */
+  .music h2 em{background:linear-gradient(90deg,#ff3b3b,#ff8a1f,#ffd23f,#3ddc84,#19c3d6,#3d7bff,#9b5cff,#ff3dbb,#ff3b3b);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:spectrum 9s linear infinite;padding-right:.04em}
+  @keyframes spectrum{to{background-position:200% 0}}
 </style>
 <script>try{if(sessionStorage.getItem('ta-studio-intro')!=='1')document.documentElement.classList.add('is-intro')}catch(e){document.documentElement.classList.add('is-intro')}</script>
 </head>
