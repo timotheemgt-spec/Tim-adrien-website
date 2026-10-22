@@ -284,6 +284,9 @@
   .intro .count{font-size:clamp(44px,6vw,96px);background:linear-gradient(0deg,#d81e05 0%,#ff5a00 18%,#ff9f1a 34%,#ffd257 48%,#ff9f1a 62%,#ff5a00 80%,#d81e05 100%);background-size:100% 300%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:flame 2.2s linear infinite,flicker 1.7s ease-in-out infinite;padding-right:.04em}
   .intro .count span{color:inherit;-webkit-text-fill-color:transparent}
   .intro .bar{background:linear-gradient(90deg,#d81e05,#ff5a00,#ff9f1a,#ffd257)}
+  /* « Portfolio » : lettres en contour blanc, intérieur noir */
+  .series-word{color:var(--ink);-webkit-text-fill-color:var(--ink);-webkit-text-stroke:2px #fff}
+  @media (max-width:900px){.series-word{-webkit-text-stroke-width:1.2px}}
 </style>
 <script>try{if(sessionStorage.getItem('ta-studio-intro')!=='1')document.documentElement.classList.add('is-intro')}catch(e){document.documentElement.classList.add('is-intro')}</script>
 </head>
