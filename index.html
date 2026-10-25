@@ -293,6 +293,9 @@
   /* intro : compteur en contour blanc, intérieur noir (plus d'effet feu) */
   .intro .count,.intro .count span{background:none;color:var(--ink);-webkit-text-fill-color:var(--ink);-webkit-text-stroke:1.5px #fff;animation:none;filter:none}
   .intro .bar{background:#fff}
+  /* « peau. » : contour blanc, intérieur noir (plus de couleur qui défile) */
+  .music h2 em{background:none;color:var(--ink);-webkit-text-fill-color:var(--ink);-webkit-text-stroke:2px #fff;animation:none}
+  @media (max-width:900px){.music h2 em{-webkit-text-stroke-width:1.2px}}
 </style>
 <script>try{if(sessionStorage.getItem('ta-studio-intro')!=='1')document.documentElement.classList.add('is-intro')}catch(e){document.documentElement.classList.add('is-intro')}</script>
 </head>
