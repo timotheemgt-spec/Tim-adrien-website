@@ -296,6 +296,18 @@
   /* « peau. » : contour blanc, intérieur noir (plus de couleur qui défile) */
   .music h2 em{background:none;color:var(--ink);-webkit-text-fill-color:var(--ink);-webkit-text-stroke:2px #fff;animation:none}
   @media (max-width:900px){.music h2 em{-webkit-text-stroke-width:1.2px}}
+  /* visionneuse vidéo : clic sur une vidéo UGC ou sur la vidéo musique */
+  .ugc-item .v,.music .vid{cursor:pointer}
+  .music .vid .play{position:absolute;left:14px;bottom:14px;color:#fff;display:flex;align-items:center;gap:8px;z-index:2}
+  .music .vid .play i{width:34px;height:34px;border:1px solid #fff;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px}
+  .vlb{position:fixed;inset:0;z-index:60;background:rgba(10,9,8,.94);display:grid;place-items:center;padding:clamp(16px,4vw,48px);opacity:0;transition:opacity .3s ease}
+  .vlb[hidden]{display:none}
+  .vlb.open{opacity:1}
+  .vlb-in{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:100%}
+  .vlb video{display:block;max-height:82vh;max-width:min(92vw,1100px);background:#000}
+  .vlb-cap{color:#cfc9c2;text-align:center}
+  .vlb-close{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);right:max(16px,env(safe-area-inset-right,0px));width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:none;color:#fff;font-size:26px;line-height:1;cursor:pointer;transition:background .2s}
+  .vlb-close:hover,.vlb-close:focus-visible{background:rgba(255,255,255,.14);outline:none}
 </style>
 <script>try{if(sessionStorage.getItem('ta-studio-intro')!=='1')document.documentElement.classList.add('is-intro')}catch(e){document.documentElement.classList.add('is-intro')}</script>
 </head>
@@ -404,9 +416,9 @@
     <p class="fade" data-fr="Formats verticaux, lifestyle, produit en situation. Du Reel Instagram à la campagne digitale, des récits courts qui parlent au studio comme à la communauté." data-en="Vertical formats, lifestyle, product in context. From Instagram Reels to digital campaigns: short stories that speak to the studio and the community alike.">Formats verticaux, lifestyle, produit en situation. Du Reel Instagram à la campagne digitale, des récits courts qui parlent au studio comme à la communauté.</p>
   </div>
   <div class="ugc-grid">
-    <div class="ugc-item fade"><div class="v"><video src="videos/gaston-nikon.mp4#t=0.1" poster="photos/ugc-gaston-nikon.jpg" muted loop playsinline preload="metadata"></video><span class="play micro"><i>▶</i><b class="hv" data-fr="Survoler" data-en="Hover">Survoler</b></span></div><h3 class="up">Gaston Luga × Nikon</h3><small class="micro">Collaboration · 2024</small></div>
-    <div class="ugc-item fade"><div class="v"><video src="videos/musu.mp4#t=0.1" poster="photos/ugc-musu.jpg" muted loop playsinline preload="metadata"></video><span class="play micro"><i>▶</i><b class="hv" data-fr="Survoler" data-en="Hover">Survoler</b></span></div><h3 class="up">Musu</h3><small class="micro" data-fr="Lunettes · 2025" data-en="Eyewear · 2025">Lunettes · 2025</small></div>
-    <div class="ugc-item fade"><div class="v"><video src="videos/kompsos.mp4#t=0.1" poster="photos/ugc-kompsos.jpg" muted loop playsinline preload="metadata"></video><span class="play micro"><i>▶</i><b class="hv" data-fr="Survoler" data-en="Hover">Survoler</b></span></div><h3 class="up">Kompsos</h3><small class="micro" data-fr="Bijoux · 2025" data-en="Jewellery · 2025">Bijoux · 2025</small></div>
+    <div class="ugc-item fade"><div class="v"><video src="videos/gaston-nikon.mp4#t=0.1" poster="photos/ugc-gaston-nikon.jpg" muted loop playsinline preload="metadata"></video><span class="play micro"><i>▶</i><b class="hv" data-fr="Lire" data-en="Play">Lire</b></span></div><h3 class="up">Gaston Luga × Nikon</h3><small class="micro">Collaboration · 2024</small></div>
+    <div class="ugc-item fade"><div class="v"><video src="videos/musu.mp4#t=0.1" poster="photos/ugc-musu.jpg" muted loop playsinline preload="metadata"></video><span class="play micro"><i>▶</i><b class="hv" data-fr="Lire" data-en="Play">Lire</b></span></div><h3 class="up">Musu</h3><small class="micro" data-fr="Lunettes · 2025" data-en="Eyewear · 2025">Lunettes · 2025</small></div>
+    <div class="ugc-item fade"><div class="v"><video src="videos/kompsos.mp4#t=0.1" poster="photos/ugc-kompsos.jpg" muted loop playsinline preload="metadata"></video><span class="play micro"><i>▶</i><b class="hv" data-fr="Lire" data-en="Play">Lire</b></span></div><h3 class="up">Kompsos</h3><small class="micro" data-fr="Bijoux · 2025" data-en="Jewellery · 2025">Bijoux · 2025</small></div>
   </div>
 </section>
 
@@ -422,7 +434,7 @@
       <a href="https://soundcloud.com/timadrien" target="_blank" rel="noopener"><span class="micro">03</span><b>Feeling Whitney</b><span class="micro">Acoustic ↗</span></a>
     </div>
   </div>
-  <div class="vid fade"><video src="videos/musique.mp4" poster="photos/musique-cover.jpg" muted loop playsinline preload="none" id="musicVid"></video></div>
+  <div class="vid fade"><video src="videos/musique.mp4" poster="photos/musique-cover.jpg" muted loop playsinline preload="none" id="musicVid"></video><span class="play micro" aria-hidden="true"><i>▶</i></span></div>
 </section>
 
 <!-- BOOK -->
@@ -448,6 +460,11 @@
   </div>
   <p class="micro" style="margin-top:18px"><button type="button" class="replay" id="replay" data-fr="Rejouer l&#x27;intro ↺" data-en="Replay intro ↺">Rejouer l'intro ↺</button></p>
 </section>
+
+<div class="vlb" id="vlb" hidden role="dialog" aria-modal="true" aria-label="Vidéo">
+  <button type="button" class="vlb-close" id="vlbClose" aria-label="Fermer">×</button>
+  <div class="vlb-in"><video id="vlbVideo" controls playsinline preload="auto"></video><p class="vlb-cap micro" id="vlbCap"></p></div>
+</div>
 
 <script>
 (function(){
@@ -693,6 +710,42 @@
     });
   });
   document.getElementById('replay').addEventListener('click', function(){ introDone = true; intro(); });
+
+  // Visionneuse : un clic ouvre la vidéo en grand, avec le son
+  (function(){
+    var box = document.getElementById('vlb'), vv = document.getElementById('vlbVideo'), cap = document.getElementById('vlbCap'), cl = document.getElementById('vlbClose'), last = null;
+    function open(src, title, poster){
+      last = document.activeElement;
+      document.querySelectorAll('video').forEach(function(x){ if(x !== vv) x.pause(); });
+      vv.src = src; vv.poster = poster || ''; vv.muted = false; cap.textContent = title || '';
+      box.hidden = false; requestAnimationFrame(function(){ box.classList.add('open'); });
+      document.documentElement.style.overflow = 'hidden';
+      vv.play().catch(function(){});
+      cl.focus();
+    }
+    function close(){
+      box.classList.remove('open'); vv.pause();
+      setTimeout(function(){ box.hidden = true; vv.removeAttribute('src'); vv.load(); }, 300);
+      document.documentElement.style.overflow = '';
+      if(last && last.focus) last.focus();
+    }
+    function hook(el, title){
+      var v = el.querySelector('video'); if(!v) return;
+      el.setAttribute('role', 'button'); el.setAttribute('tabindex', '0');
+      function go(){ open(v.getAttribute('src').split('#')[0], typeof title === 'function' ? title() : title, v.getAttribute('poster')); }
+      el.addEventListener('click', go);
+      el.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } });
+    }
+    document.querySelectorAll('.ugc-item').forEach(function(it){
+      var h = it.querySelector('h3'), sm = it.querySelector('small');
+      hook(it.querySelector('.v'), function(){ return (h ? h.textContent : '') + (sm ? ' · ' + sm.textContent : ''); });
+    });
+    var mv = document.querySelector('.music .vid');
+    if(mv) hook(mv, function(){ return (typeof LANG !== 'undefined' && LANG === 'en') ? 'Music · Paris' : 'Musique · Paris'; });
+    cl.addEventListener('click', close);
+    box.addEventListener('click', function(e){ if(e.target === box) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !box.hidden) close(); });
+  })();
 })();
 </script>
 </body>
