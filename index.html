@@ -199,7 +199,13 @@
     .press,.music{grid-template-columns:1fr}
     .press-ph{min-height:46vh}
     .ugc{grid-template-columns:1fr;gap:5vh}
-    .ugc-grid{grid-template-columns:1fr 1fr}
+    /* mobile : les 4 vidéos sur une seule ligne */
+    .ugc-grid{grid-template-columns:repeat(4,1fr);gap:6px}
+    .ugc-item h3{font-size:11px;margin-top:8px;line-height:1.05}
+    .ugc-item small{font-size:7.5px;letter-spacing:.06em;margin-top:4px}
+    .ugc-item .play{left:6px;bottom:6px;gap:0}
+    .ugc-item .play i{width:22px;height:22px;font-size:7px}
+    .ugc-item .play b{display:none}
     .music .vid{justify-self:stretch;max-width:none;max-height:none}
     .book-grid{columns:2;column-gap:10px}
     .book-grid a{margin-bottom:10px}
